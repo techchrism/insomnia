@@ -168,11 +168,14 @@ export async function initInsomniaObject(
         localVars: localVariables,
     });
 
-    // replace all variables in the raw URL before parsing it
-    const sanitizedRawUrl = `${rawObj.request.url}`.replace(/{{\s*\_\./g, '{{');
+    // sanitize URL, see _updateElementText in nunjuncks-tags.ts
+    const sanitizedRawUrl = rawObj.request.url.replace(/\\/g, '')
+        .replace(/^{%/, '')
+        .replace(/%}$/, '')
+        .replace(/^{{/, '')
+        .replace(/}}$/, '')
+        .trim();
     const renderedRawUrl = variables.replaceIn(sanitizedRawUrl);
-
-    // parse the URL to get the host + protocol
     const renderedUrl = toUrlObject(renderedRawUrl);
 
     // filter client certificates by the rendered base URL

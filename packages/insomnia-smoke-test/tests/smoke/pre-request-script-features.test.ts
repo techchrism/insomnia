@@ -437,6 +437,14 @@ test.describe('pre-request features tests', async () => {
             '__fromScript1': 'baseEnvironment',
             '__fromScript2': 'collection',
             '__fromScript': 'environment',
+            'examplehost': 'https://mock.insomnia.rest',
+            'a': {
+                'b': {
+                    'c': {
+                        'url': 'https://mock.insomnia.rest',
+                    },
+                },
+            },
         });
     });
 });
